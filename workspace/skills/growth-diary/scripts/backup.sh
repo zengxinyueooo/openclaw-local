@@ -1,6 +1,6 @@
 #!/bin/bash
 # 成长沉淀 - 自动备份脚本 🍑✨
-# 功能：检查 ~/.openclaw/workspace/ 目录变更，自动提交并推送到 GitHub
+# 功能：检查 ~/.openclaw/ 目录变更，自动提交并推送到 GitHub
 
 set -e
 

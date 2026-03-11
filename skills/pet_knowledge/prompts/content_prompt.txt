@@ -1,8 +1,0 @@
-{pet_breed}科普图：{topic}，参考示例图布局排版：
-1. 宠物写实抠图放一侧/角落/中间，占画面1/4-1/3，无背景
-2. 文字信息密度高（单张≥150字，多短句/分点），铺满画面大部分区域，干货详实无错字
-3. 风格简洁偏实用，加少量简约图标点缀，无卡通元素
-4. 小红书分辨率，单张完整图无拼接无水印
-5. 每张画面只能是一幅完整图，不能是几张小图拼接。
-一定严格按照示例图参考：模块分区+清晰标题+分点干货排版：
-示例图：https://p1.meituan.net/dzusergrowthcontent/444ba7de695ce2cc8a4857b82359d65a1672299.png，https://p0.meituan.net/dzusergrowthcontent/00f15e8466a83dd71788f7657657d1732029842.png，https://p0.meituan.net/dzusergrowthcontent/7c070a8203ccf039e328e3db4e17efec1669428.png， https://p0.meituan.net/dzusergrowthcontent/8a80b8c00628c818f63b89a24686dae51891795.png 。
