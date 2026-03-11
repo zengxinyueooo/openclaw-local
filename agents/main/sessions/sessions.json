@@ -1,7 +1,7 @@
 {
   "agent:main:main": {
     "sessionId": "6577a7d9-daab-4a9a-a7dd-ecb9e55335e9",
-    "updatedAt": 1773211415298,
+    "updatedAt": 1773214142811,
     "systemSent": true,
     "abortedLastRun": false,
     "chatType": "direct",
@@ -129,7 +129,7 @@
     "model": "kimi-k2.5",
     "systemPromptReport": {
       "source": "run",
-      "generatedAt": 1773210862952,
+      "generatedAt": 1773214090061,
       "sessionId": "6577a7d9-daab-4a9a-a7dd-ecb9e55335e9",
       "sessionKey": "agent:main:main",
       "provider": "baiduqianfancodingplan",
@@ -390,9 +390,9 @@
     "cacheWrite": 0,
     "totalTokensFresh": true,
     "contextTokens": 98304,
-    "inputTokens": 199684,
-    "outputTokens": 226,
-    "totalTokens": 65657
+    "inputTokens": 69379,
+    "outputTokens": 145,
+    "totalTokens": 69379
   },
   "agent:main:elephant:direct:unknown": {
     "sessionId": "6fbddf54-d239-46dd-aab5-430b83d2b30c",
