@@ -15,9 +15,17 @@ async function extractCookie() {
     try {
         // 连接 Chrome
         client = await CDP({ port: 9222 });
-        const { Network } = client;
+        const { Network, Runtime } = client;
 
-        // 获取所有 Cookie
+        // 先通过 JS 获取当前页面的 cookie（包含 httpOnly=false 的）
+        const { result } = await Runtime.evaluate({
+            expression: `document.cookie`,
+            returnByValue: true
+        });
+        
+        const jsCookie = result.value || '';
+        
+        // 获取所有 Cookie（包含 httpOnly 的）
         const { cookies } = await Network.getAllCookies();
         
         // 筛选小红书的 Cookie
@@ -30,6 +38,9 @@ async function extractCookie() {
             process.exit(1);
         }
 
+        // 检查是否有 web_session（登录凭证）
+        const hasSession = redbookCookies.some(c => c.name === 'web_session');
+        
         // 格式化 Cookie
         const cookieString = redbookCookies
             .map(c => `${c.name}=${c.value}`)
@@ -47,9 +58,15 @@ async function extractCookie() {
 
         console.log('✅ Cookie 提取成功！');
         console.log(`📁 已保存到: ${COOKIE_FILE}`);
+        console.log(`🔑 登录状态: ${hasSession ? '✓ 已登录' : '⚠ 可能未完全登录'}`);
         console.log('');
-        console.log('🍠 Cookie 内容:');
-        console.log(cookieString.substring(0, 100) + '...');
+        console.log('🍠 Cookie 列表:');
+        redbookCookies.forEach(c => {
+            console.log(`  ${c.name}: ${c.value.substring(0, 50)}${c.value.length > 50 ? '...' : ''}`);
+        });
+        console.log('');
+        console.log('📝 Cookie 字符串:');
+        console.log(cookieString);
 
         return cookieString;
     } catch (err) {

@@ -1,0 +1,24 @@
+{
+  "agents": [
+    {
+      "slotId": 1,
+      "alias": "MC-1号",
+      "autoApprove": true
+    },
+    {
+      "slotId": 2,
+      "alias": "MC-2号",
+      "autoApprove": true
+    },
+    {
+      "slotId": 3,
+      "alias": "MC-3号",
+      "autoApprove": true
+    }
+  ],
+  "pollInterval": 3,
+  "stallTimeoutSeconds": 120,
+  "notifyCooldownSeconds": 10,
+  "historyRetentionDays": 30,
+  "maxHistoryPerSlot": 50
+}
