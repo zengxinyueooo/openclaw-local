@@ -1,0 +1,42 @@
+{
+  "id": "openclaw-elephant-plugin",
+  "channels": [
+    "elephant"
+  ],
+  "uiHints": {
+    "env": {
+      "label": "SSO Env",
+      "help": "选择 SSO 环境（决定从 KMS 读取 TEST/PROD 的 clientId，无需 secret）。",
+      "advanced": true
+    },
+    "botEnabled": {
+      "label": "Bot 启用开关",
+      "help": "按 bot 名称控制是否启用，例如 {\"1024claw\": true, \"levi\": false}。",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "env": {
+        "type": "string",
+        "enum": [
+          "test",
+          "prod"
+        ]
+      },
+      "botEnabled": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "boolean"
+        },
+        "description": "按 bot 名称控制是否启用",
+        "default": {
+          "1024claw": true,
+          "levi": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "wizard": {
+    "lastRunAt": "2026-03-08T14:15:50.690Z",
+    "lastRunVersion": "2026.3.2",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "qianfan:default": {
+        "provider": "qianfan",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "baiduqianfancodingplan": {
+        "baseUrl": "https://qianfan.baidubce.com/v2/coding",
+        "apiKey": "bce-v3/ALTAKSP-sPLLvC70loeiXdyDUw6D5/c4791aa5f1f94147a5530fadac4f8e1bfd987450",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "kimi-k2.5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0.0025, "output": 0.01, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 98304,
+            "maxTokens": 65536
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "baiduqianfancodingplan/kimi-k2.5"
+      },
+      "models": {
+        "baiduqianfancodingplan/kimi-k2.5": {
+          "alias": "QianfanCodingPlan"
+        }
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "workspace": "/Users/zengxinyue/.openclaw/workspace"
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "boot-md": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "6711b680bf3eb74065a22823ca105236e1dd6f3ccd5fff13"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "plugins": {
+    "entries": {
+      "openclaw-elephant-plugin": {
+        "enabled": true,
+        "config": {
+          "env": "prod"
+        }
+      }
+    }
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-08T14:15:50.710Z"
+  },
+  "tools": {
+    "profile": "full"
+  },
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "chrome",
+    "profiles": {
+      "openclaw": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      },
+      "chrome": {
+        "cdpUrl": "http://127.0.0.1:9222",
+        "color": "#4285F4"
+      }
+    }
+  },
+  "skills": {
+    "paths": [
+      "~/.openclaw/workspace/skills",
+      "~/.openclaw/skills"
+    ]
+  }
+}
