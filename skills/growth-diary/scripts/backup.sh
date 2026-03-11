@@ -56,8 +56,8 @@ fi
 
 # 获取变更统计
 CHANGED_FILES=$(git diff --cached --name-only | wc -l)
-INSERTIONS=$(git diff --cached --stat | grep -oE '[0-9]+ insertion' | awk '{s+=$1} END {print s}')
-DELETIONS=$(git diff --cached --stat | grep -oE '[0-9]+ deletion' | awk '{s+=$1} END {print s}')
+INSERTIONS=$(git diff --cached --stat | tail -1 | grep -oE '[0-9]+ insertion' | awk '{s+=$1} END {print s}')
+DELETIONS=$(git diff --cached --stat | tail -1 | grep -oE '[0-9]+ deletion' | awk '{s+=$1} END {print s}')
 
 echo -e "${GREEN}📊 变更统计：${NC}"
 echo "   - 变更文件数: $CHANGED_FILES"
@@ -73,6 +73,10 @@ git commit -m "growth-diary: 沉淀备份 ${DATE} ${TIME}
 - 删除行数: ${DELETIONS:-0}
 
 自动备份 by 成长沉淀 skill 🍑"
+
+# 先拉取远程更新
+echo -e "${YELLOW}🔄 同步远程更新...${NC}"
+git pull origin "$BACKUP_BRANCH" --rebase || true
 
 # 推送到远程
 echo -e "${YELLOW}🚀 推送到 GitHub...${NC}"

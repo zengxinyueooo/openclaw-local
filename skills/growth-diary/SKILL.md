@@ -125,7 +125,17 @@ git push origin main
 
 - Git 已配置好用户信息和 SSH key
 - GitHub 仓库已初始化并有写权限
-- `~/.openclaw/` 是 git 仓库
+- `~/.openclaw/workspace/` 是 git 仓库
+
+## 沉淀执行流程
+
+当宝宝说"进行成长沉淀"时，桃桃会：
+
+1. **收集对话** - 回顾今日和宝宝的对话内容
+2. **提取坑点** - 识别踩过的坑和解决方案
+3. **生成日记** - 使用模板生成结构化日记
+4. **保存文件** - 写入 `memory/YYYY-MM-DD.md`
+5. **执行备份** - 调用 `scripts/backup.sh` 自动备份到 GitHub
 
 ## 初始化步骤（首次使用）
 
