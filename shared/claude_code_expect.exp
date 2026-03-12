@@ -1,0 +1,103 @@
+#!/usr/bin/expect -f
+#
+# Claude Code 自动交互脚本
+# 完全自动化执行任务并返回结果
+#
+
+set timeout 180
+set workspace [lindex $argv 0]
+set task [lindex $argv 1]
+set output_file [lindex $argv 2]
+
+# 启动 Claude Code
+spawn mc --code
+
+# 等待协议提示或就绪
+expect {
+    -re "(agree|y/n|terms)" {
+        send "y\r"
+        exp_continue
+    }
+    -re "(❯|claude|>>>|╭─)" {
+        # 已就绪
+    }
+    timeout {
+        puts "⚠️ 等待超时，继续..."
+    }
+}
+
+# 等待提示符完全就绪
+sleep 5
+
+# 等待提示符出现
+expect {
+    -re "(❯|>>>|╭─|╰─)" {
+        puts "✅ 检测到提示符"
+    }
+    timeout {
+        puts "⚠️ 未检测到提示符，继续..."
+    }
+}
+
+sleep 2
+
+# 发送任务
+puts "📤 发送任务..."
+send "$task"
+sleep 1
+send "\r"
+sleep 1
+
+# 等待执行完成
+set output ""
+set complete 0
+set max_wait 90  ;# 最多等待90秒
+
+puts "⏳ 等待执行..."
+
+for {set i 0} {$i < $max_wait} {incr i} {
+    expect {
+        -re "(完成|done|complete|任务完成)" {
+            append output $expect_out(buffer)
+            puts "✅ 检测到完成标志"
+            set complete 1
+        }
+        -re "(created|创建|file|文件)" {
+            append output $expect_out(buffer)
+            puts "📄 检测到文件操作"
+        }
+        -re "(❯|>>>|╭─)" {
+            append output $expect_out(buffer)
+            if {$complete} {
+                puts "✅ 完成且回到提示符"
+                break
+            }
+        }
+        timeout {
+            # 每秒检查一次
+        }
+    }
+    
+    # 每10秒输出进度
+    if {[expr {$i % 10}] == 0} {
+        puts "⏳ 已等待 $i 秒..."
+    }
+    
+    sleep 1
+}
+
+# 再等待一下确保文件写入
+sleep 2
+
+# 保存输出
+set fp [open $output_file w]
+puts $fp $output
+close $fp
+
+puts "📝 输出已保存到: $output_file"
+
+# 退出
+send "\x03"  ;# Ctrl+C
+sleep 1
+
+puts "✅ 任务执行完成"

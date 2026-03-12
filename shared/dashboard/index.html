@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍑 水果Agent监控看板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-card.running .stat-value { color: #667eea; }
+        .stat-card.completed .stat-value { color: #10b981; }
+        .stat-card.failed .stat-value { color: #ef4444; }
+        
+        .tasks-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .tasks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .tasks-header h2 {
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+        
+        .refresh-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .refresh-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .task-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #ddd;
+            transition: all 0.2s;
+        }
+        
+        .task-item:hover {
+            background: #f0f1f2;
+        }
+        
+        .task-item.running { border-left-color: #667eea; }
+        .task-item.completed { border-left-color: #10b981; }
+        .task-item.failed { border-left-color: #ef4444; }
+        .task-item.pending { border-left-color: #f59e0b; }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .task-agent {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .task-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-running { background: #e0e7ff; color: #667eea; }
+        .status-completed { background: #d1fae5; color: #10b981; }
+        .status-failed { background: #fee2e2; color: #ef4444; }
+        .status-pending { background: #fef3c7; color: #f59e0b; }
+        
+        .task-message {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-fill.completed { background: #10b981; }
+        .progress-fill.failed { background: #ef4444; }
+        
+        .task-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .last-update {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .agent-icon {
+            font-size: 1.5em;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🍑 水果Agent监控看板</h1>
+        <p>小桃主管实时监控小橙🍊和小葡🍇的工作进度</p>
+    </div>
+    
+    <div class="dashboard">
+        <div class="stats-grid">
+            <div class="stat-card running">
+                <h3>运行中</h3>
+                <div class="stat-value" id="stat-running">0</div>
+            </div>
+            <div class="stat-card completed">
+                <h3>已完成</h3>
+                <div class="stat-value" id="stat-completed">0</div>
+            </div>
+            <div class="stat-card failed">
+                <h3>失败</h3>
+                <div class="stat-value" id="stat-failed">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>总任务</h3>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+        </div>
+        
+        <div class="tasks-container">
+            <div class="tasks-header">
+                <h2>📋 任务列表</h2>
+                <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">
+                    🔄 刷新
+                </button>
+            </div>
+            <div class="task-list" id="taskList">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🍑</div>
+                    <p>暂无任务，小桃正在派活中...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="last-update" id="lastUpdate"></div>
+    </div>
+    
+    <script>
+        const API_URL = '/api/progress';
+        const USE_MOCK_DATA = false;  // 设为true使用模拟数据
+        let autoRefreshInterval;
+        
+        // Agent图标映射
+        const agentIcons = {
+            'main': '🍑',
+            'coder': '🍊',
+            'researcher': '🍇',
+            'default': '🤖'
+        };
+        
+        // 状态文本映射
+        const statusText = {
+            'running': '运行中',
+            'completed': '已完成',
+            'failed': '失败',
+            'pending': '待处理'
+        };
+        
+        async function fetchProgress() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('获取进度失败:', error);
+                // 尝试从本地文件读取（开发模式）
+                return fetchLocalProgress();
+            }
+        }
+        
+        function fetchLocalProgress() {
+            // 模拟数据，用于本地测试
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        {
+                            agent_id: 'coder',
+                            task_id: 'task-001',
+                            status: 'running',
+                            progress: 65,
+                            message: '正在生成柱状图...',
+                            timestamp: new Date().toISOString(),
+                            elapsed_seconds: 120
+                        },
+                        {
+                            agent_id: 'researcher',
+                            task_id: 'task-002',
+                            status: 'completed',
+                            progress: 100,
+                            message: '调研完成！',
+                            timestamp: new Date(Date.now() - 300000).toISOString(),
+                            elapsed_seconds: 300
+                        }
+                    ]);
+                }, 500);
+            });
+        }
+        
+        function formatTime(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleString('zh-CN', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+        
+        function formatDuration(seconds) {
+            if (seconds < 60) return `${seconds}秒`;
+            if (seconds < 3600) return `${Math.floor(seconds / 60)}分${seconds % 60}秒`;
+            return `${Math.floor(seconds / 3600)}时${Math.floor((seconds % 3600) / 60)}分`;
+        }
+        
+        function renderTasks(tasks) {
+            const taskList = document.getElementById('taskList');
+            
+            if (tasks.length === 0) {
+                taskList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🍑</div>
+                        <p>暂无任务，小桃正在派活中...</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            taskList.innerHTML = tasks.map(task => {
+                const icon = agentIcons[task.agent_id] || agentIcons.default;
+                const statusClass = `status-${task.status}`;
+                const isRunning = task.status === 'running';
+                
+                return `
+                    <div class="task-item ${task.status}">
+                        <div class="task-header">
+                            <div class="task-agent">
+                                <span class="agent-icon">${icon}</span>
+                                <span>${task.agent_id}</span>
+                                <span style="color: #999; font-size: 12px;">#${task.task_id}</span>
+                            </div>
+                            <span class="task-status ${statusClass}">
+                                ${isRunning ? '<span class="pulse">●</span> ' : ''}${statusText[task.status] || task.status}
+                            </span>
+                        </div>
+                        <div class="task-message">${task.message}</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ${task.status}" style="width: ${task.progress}%"></div>
+                        </div>
+                        <div class="task-meta">
+                            <span>⏱️ ${formatDuration(task.elapsed_seconds)}</span>
+                            <span>🕐 ${formatTime(task.timestamp)}</span>
+                            <span>📊 ${task.progress}%</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateStats(tasks) {
+            const stats = {
+                running: tasks.filter(t => t.status === 'running').length,
+                completed: tasks.filter(t => t.status === 'completed').length,
+                failed: tasks.filter(t => t.status === 'failed').length,
+                total: tasks.length
+            };
+            
+            document.getElementById('stat-running').textContent = stats.running;
+            document.getElementById('stat-completed').textContent = stats.completed;
+            document.getElementById('stat-failed').textContent = stats.failed;
+            document.getElementById('stat-total').textContent = stats.total;
+        }
+        
+        async function refreshData() {
+            const btn = document.getElementById('refreshBtn');
+            btn.disabled = true;
+            btn.textContent = '🔄 刷新中...';
+            
+            try {
+                const tasks = await fetchProgress();
+                renderTasks(tasks);
+                updateStats(tasks);
+                document.getElementById('lastUpdate').textContent = 
+                    `最后更新: ${new Date().toLocaleString('zh-CN')}`;
+            } catch (error) {
+                console.error('刷新失败:', error);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔄 刷新';
+            }
+        }
+        
+        function startAutoRefresh() {
+            // 每5秒自动刷新
+            autoRefreshInterval = setInterval(refreshData, 5000);
+        }
+        
+        function stopAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            refreshData();
+            startAutoRefresh();
+        });
+        
+        // 页面不可见时停止刷新
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoRefresh();
+            } else {
+                startAutoRefresh();
+                refreshData();
+            }
+        });
+    </script>
+</body>
+</html>

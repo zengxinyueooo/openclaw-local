@@ -1,0 +1,12 @@
+{
+  "agent_id": "coder",
+  "task_id": "task-002",
+  "status": "failed",
+  "progress": 0,
+  "message": "Claude Code 执行失败",
+  "timestamp": "2026-03-12T21:24:24.550198",
+  "elapsed_seconds": 310.05,
+  "details": {
+    "error": "                                                                 \r\n \u001b[38;5;153m❯\u001b[39m \u001b[38;5;246m1. \u001b[38;5;153mYes, proceed\u001b[39m                                                              \r\n   \u001b[38;5;246m2. \u001b[39mNo, exit                                                                  \r\n                                                                                \r\n \u001b[38;5;246mEnter to confirm · Esc to cancel\u001b[39m                                               \r\n\u001b[?2026l\u001b[?25l\u001b[?2004h\u001b[?1004h"
+  }
+}
