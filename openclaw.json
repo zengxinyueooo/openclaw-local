@@ -52,7 +52,33 @@
         "maxConcurrent": 8
       },
       "workspace": "/Users/zengxinyue/.openclaw/workspace"
-    }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "小桃",
+        "model": "baiduqianfancodingplan/kimi-k2.5",
+        "subagents": {
+          "allowAgents": [
+            "coder",
+            "researcher"
+          ]
+        }
+      },
+      {
+        "id": "coder",
+        "name": "小橙 - Coding Agent",
+        "workspace": "/Users/zengxinyue/.openclaw/workspace-coder",
+        "model": "baiduqianfancodingplan/kimi-k2.5"
+      },
+      {
+        "id": "researcher",
+        "name": "小葡 - Research Agent",
+        "workspace": "/Users/zengxinyue/.openclaw/workspace-researcher",
+        "model": "baiduqianfancodingplan/kimi-k2.5"
+      }
+    ]
   },
   "commands": {
     "native": "auto",
@@ -118,7 +144,14 @@
     "lastTouchedAt": "2026-03-08T14:15:50.710Z"
   },
   "tools": {
-    "profile": "full"
+    "profile": "full",
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": ["main", "coder", "researcher"]
+    }
   },
   "browser": {
     "enabled": true,
@@ -133,11 +166,5 @@
         "color": "#4285F4"
       }
     }
-  },
-  "skills": {
-    "paths": [
-      "~/.openclaw/workspace/skills",
-      "~/.openclaw/skills"
-    ]
   }
 }
