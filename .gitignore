@@ -1,61 +1,35 @@
-# OpenClaw Gitignore
+# OpenClaw Git Ignore
 
-# macOS
-.DS_Store
+# Browser cache
+browser/chrome/user-data/Default/Cache/
+browser/chrome/user-data/Default/Code Cache/
+browser/chrome/user-data/Default/GPUCache/
+browser/chrome/user-data/Default/Dawn*
+browser/chrome/user-data/Default/Service Worker/ScriptCache/
+browser/chrome/user-data/Default/optimization_guide_model_store/
+browser/chrome/user-data/GrShaderCache/
+browser/chrome/user-data/GraphiteDawnCache/
+browser/chrome/user-data/ShaderCache/
+browser/chrome/user-data/Default/IndexedDB/
+browser/chrome/user-data/Default/Local Storage/
+browser/chrome/user-data/Default/Session Storage/
+browser/chrome/user-data/Default/Web Applications/
 
 # Logs
 *.log
 logs/
 
-# Environment
-.env
+# Temporary files
+*.tmp
+/tmp/
 
-# Node
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules
 node_modules/
 
-# Python
-__pycache__/
-*.pyc
-
-# IDE
-.vscode/
-.idea/
-
-# Browser data (缓存、用户数据等)
-browser/openclaw/user-data/
-browser/chrome-extension/
-
-# Agent sessions (会话记录)
-agents/main/sessions/*.jsonl
-agents/main/sessions/*.jsonl.lock
-agents/main/sessions/*.reset.*
-
-# Media files
-media/
-
-# SQLite databases
-*.sqlite
-*.sqlite-journal
-*.sqlite-wal
-
-# Backup files
-*.bak
-*.bak.*
-
-# Cache directories
-*/Cache/
-*/cache/
-*.cache
-
-# Lock files
-LOCK
-LOG
-LOG.old
-
-# Chrome extension cache
-extensions/openclaw-elephant-plugin/node_modules/
-extensions/openclaw-elephant-plugin/package-lock.json
-
-# Other
-*.pma
-*.old
+# Build artifacts
+dist/
+build/

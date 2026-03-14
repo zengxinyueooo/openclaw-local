@@ -1,0 +1,48 @@
+{
+  "name": "@ai/daxiang",
+  "version": "1.0.0-beta9",
+  "type": "module",
+  "description": "DaXiang (大象) enterprise messaging platform channel plugin for OpenClaw",
+  "keywords": [
+    "openclaw",
+    "channel",
+    "daxiang",
+    "meituan",
+    "enterprise-messaging"
+  ],
+  "author": "yeming <yeming@meituan.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "scripts",
+    "openclaw.plugin.json"
+  ],
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc -p tsconfig.json || echo 'Build requires TypeScript 5.x and Node 22+. Please use: cd ../../ && pnpm build'",
+    "prepublishOnly": "npm run build",
+    "postinstall": "node scripts/postinstall.cjs",
+    "generate-sso": "node scripts/generate-sso-default.mjs"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "@mtfe/sso-web-oidc-cli": "^1.3.1"
+  },
+  "devDependencies": {
+    "openclaw": "^2026.1.29",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@git.sankuai.com/~yeming/ai-agent.git"
+  },
+  "publishConfig": {
+    "registry": "http://r.npm.sankuai.com/"
+  }
+}
