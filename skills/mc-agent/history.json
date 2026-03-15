@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "slotId": 1,
+    "alias": "MC-1号",
+    "task": "查询上海今天天气，用 curl 访问 wttr.in",
+    "workdir": "/tmp",
+    "tmuxSession": "",
+    "pid": 0,
+    "claudeSessionId": null,
+    "jsonlPath": null,
+    "status": "finished",
+    "outcome": "exited",
+    "startedAt": "2026-03-11T17:15:29+0800",
+    "startedEpoch": 1773220529.640393,
+    "finishedEpoch": 1773579761.4025931,
+    "finishedAt": "2026-03-15T21:02:41+0800",
+    "durationSeconds": 359232,
+    "approvalCount": 0
+  }
+]
