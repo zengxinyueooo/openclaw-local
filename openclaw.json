@@ -162,7 +162,7 @@
     "self-improvement": {
       "enabled": true,
       "path": "/Users/zengxinyue/.openclaw/hooks/self-improvement",
-      "triggers": ["task-complete", "command-error"]
+      "triggers": ["task-complete", "command-error", "user-correction"]
     }
   },
   "gateway": {
