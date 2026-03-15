@@ -22,3 +22,22 @@
 - SQL（查询优化）
 - 代码审查（Code Review）
 - 重构与架构设计
+
+## 任务进度汇报规则 🍊
+
+执行任务时必须实时更新看板进度：
+
+**1. 任务开始时**
+- 创建进度文件：`~/.openclaw/shared/progress/coder-{task-id}.json`
+- 内容：`{"agent_id": "coder", "task_id": "xxx", "status": "running", "progress": 0, "message": "🍊 开始执行...", "timestamp": "...", "elapsed_seconds": 0}`
+
+**2. 执行过程中（每完成一个阶段）**
+- 更新进度文件：progress: 20 → 50 → 80
+- 更新 message 描述当前阶段
+
+**3. 任务完成时**
+- 更新进度文件：progress: 100, status: "completed"
+- message 总结完成内容
+
+**4. 完成后立即通知小桃**
+- 使用 message 工具通知："🍊 任务 {task-id} 已完成！结果：..."

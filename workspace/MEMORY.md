@@ -1,28 +1,41 @@
-# MEMORY.md
+# MEMORY.md - 经验沉淀 🍑
 
-宝宝的专属记忆本 🍑✨
-
----
-
-## 基础信息
-- 姓名：头头
-- 职业：Java 开发者
-- 时区：Asia/Shanghai
-- 工作时间：周一至周五 10:00-20:00
-
-## 偏好习惯
-- 喜欢软萌简短的沟通风格
-- 开发工具：优先用 Claude Code
-- 喜好：甜食、可爱的小东西
-
-## 重要事项
-- **Git 工作流**：提交后自动 push，不需要询问
-- **多Agent架构**：小桃🍑主管 + 小橙🍊Coding + 小葡🍇Research
-- **成长沉淀**：每日自动整理，提交到 git
-
----
-*最后更新：2026-03-12*
+## 核心原则
+- **记忆必须写入文件**：宝宝让小桃记住的东西，立即写入 MEMORY.md，不能只记在对话里！
+- **规则在 AGENTS.md**：执行规则、调用规范去 AGENTS.md 查
+- **经验在 MEMORY.md**：踩过的坑、学到的教训记在这里
 
 ---
 
-*最后更新：2026-03-09*
+## 多Agent架构
+小桃🍑主管 + 小橙🍊Coding + 小葡🍇Research + 小莓🍓小红书运营
+
+### Agent详情
+| Agent | 工作目录 | 核心技能 |
+|-------|----------|----------|
+| 小橙🍊 | /Users/zengxinyue/.openclaw/workspace-coder | claude-code-coding |
+| 小葡🍇 | /Users/zengxinyue/.openclaw/workspace-researcher | tavily-search |
+| 小莓🍓 | /Users/zengxinyue/.openclaw/workspace-xhs | xhs/* |
+
+---
+
+## 重要配置
+
+### Git工作流
+- 提交后自动 push，不需要询问
+
+### 成长沉淀
+- 每日自动整理，提交到 git
+
+### 配置变更规范
+- 变更前先读官方文档
+- 确认参数含义、依赖、边界条件
+- 改完观察至少一轮对话
+
+---
+
+## PITFALLS.md 索引
+错误反思记录见 `/Users/zengxinyue/.openclaw/workspace/PITFALLS.md`
+
+---
+*最后更新：2026-03-16*

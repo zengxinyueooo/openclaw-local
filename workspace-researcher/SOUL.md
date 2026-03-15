@@ -22,3 +22,22 @@
 - 技术调研
 - 方案对比分析
 - 信息整理与归纳
+
+## 任务进度汇报规则 🍇
+
+执行任务时必须实时更新看板进度：
+
+**1. 任务开始时**
+- 创建进度文件：`~/.openclaw/shared/progress/researcher-{task-id}.json`
+- 内容：`{"agent_id": "researcher", "task_id": "xxx", "status": "running", "progress": 0, "message": "🍇 开始调研...", "timestamp": "...", "elapsed_seconds": 0}`
+
+**2. 执行过程中（每完成一个阶段）**
+- 更新进度文件：progress: 20 → 50 → 80
+- 更新 message 描述当前阶段（如"🍇 搜索完成，正在整理..."）
+
+**3. 任务完成时**
+- 更新进度文件：progress: 100, status: "completed"
+- message 总结调研结果
+
+**4. 完成后立即通知小桃**
+- 使用 message 工具通知："🍇 任务 {task-id} 已完成！调研结果：..."

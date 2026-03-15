@@ -1,9 +1,27 @@
 {
+  "meta": {
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-14T06:06:29.639Z"
+  },
   "wizard": {
     "lastRunAt": "2026-03-08T14:15:50.690Z",
     "lastRunVersion": "2026.3.2",
     "lastRunCommand": "onboard",
     "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "chrome",
+    "profiles": {
+      "openclaw": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      },
+      "chrome": {
+        "cdpUrl": "http://127.0.0.1:9222",
+        "color": "#4285F4"
+      }
+    }
   },
   "auth": {
     "profiles": {
@@ -25,8 +43,15 @@
             "id": "kimi-k2.5",
             "name": "kimi-k2.5",
             "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0.0025, "output": 0.01, "cacheRead": 0, "cacheWrite": 0 },
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.0025,
+              "output": 0.01,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
             "contextWindow": 98304,
             "maxTokens": 65536
           }
@@ -44,14 +69,14 @@
           "alias": "QianfanCodingPlan"
         }
       },
+      "workspace": "/Users/zengxinyue/.openclaw/workspace",
       "compaction": {
         "mode": "safeguard"
       },
       "maxConcurrent": 4,
       "subagents": {
         "maxConcurrent": 8
-      },
-      "workspace": "/Users/zengxinyue/.openclaw/workspace"
+      }
     },
     "list": [
       {
@@ -62,7 +87,8 @@
         "subagents": {
           "allowAgents": [
             "coder",
-            "researcher"
+            "researcher",
+            "xiaomei"
           ]
         }
       },
@@ -77,8 +103,37 @@
         "name": "小葡 - Research Agent",
         "workspace": "/Users/zengxinyue/.openclaw/workspace-researcher",
         "model": "baiduqianfancodingplan/kimi-k2.5"
+      },
+      {
+        "id": "xiaomei",
+        "name": "小莓 - 小红书运营专家",
+        "workspace": "/Users/zengxinyue/.openclaw/workspace-xhs",
+        "model": "baiduqianfancodingplan/kimi-k2.5"
       }
     ]
+  },
+  "tools": {
+    "profile": "full",
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "coder",
+        "researcher",
+        "xiaomei"
+      ]
+    }
+  },
+  "messages": {
+    "queue": {
+      "mode": "steer-backlog",
+      "debounceMs": 1000,
+      "cap": 20,
+      "drop": "summarize"
+    }
   },
   "commands": {
     "native": "auto",
@@ -103,6 +158,11 @@
           "enabled": true
         }
       }
+    },
+    "self-improvement": {
+      "enabled": true,
+      "path": "/Users/zengxinyue/.openclaw/hooks/self-improvement",
+      "triggers": ["task-complete", "command-error"]
     }
   },
   "gateway": {
@@ -131,40 +191,29 @@
   },
   "plugins": {
     "entries": {
-      "openclaw-elephant-plugin": {
-        "enabled": true,
-        "config": {
-          "env": "prod"
-        }
+      "daxiang": {
+        "enabled": true
       }
-    }
-  },
-  "meta": {
-    "lastTouchedVersion": "2026.3.2",
-    "lastTouchedAt": "2026-03-08T14:15:50.710Z"
-  },
-  "tools": {
-    "profile": "full",
-    "sessions": {
-      "visibility": "all"
     },
-    "agentToAgent": {
-      "enabled": true,
-      "allow": ["main", "coder", "researcher"]
+    "installs": {
+      "daxiang": {
+        "source": "npm",
+        "spec": "@ai/daxiang",
+        "installPath": "/Users/zengxinyue/.openclaw/extensions/daxiang",
+        "version": "1.0.0-beta9",
+        "resolvedName": "@ai/daxiang",
+        "resolvedVersion": "1.0.0-beta9",
+        "resolvedSpec": "@ai/daxiang@1.0.0-beta9",
+        "integrity": "sha512-jvbuTW7MOrV9vUfp7TKAiu3UFhBhP6/Pv/vsInnUOoUq1RrohlGi7FznpxLSrYVu5fc8a7xMBcOO3CFUXRmrKg==",
+        "shasum": "339e440c1e86c2ab1275a92f9d6e7ed3ea091705",
+        "resolvedAt": "2026-03-14T06:06:00.476Z",
+        "installedAt": "2026-03-14T06:06:29.480Z"
+      }
     }
   },
-  "browser": {
-    "enabled": true,
-    "defaultProfile": "chrome",
-    "profiles": {
-      "openclaw": {
-        "cdpPort": 18800,
-        "color": "#FF4500"
-      },
-      "chrome": {
-        "cdpUrl": "http://127.0.0.1:9222",
-        "color": "#4285F4"
-      }
+  "channels": {
+    "daxiang": {
+      "enabled": true
     }
   }
 }
