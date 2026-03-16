@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "conan_device_management": {
+      "baseUrl": "http://mcphub-server.sankuai.com/mcphub-b/4a6adb127ba748"
+    }
+  },
+  "imports": []
+}

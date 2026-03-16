@@ -2,7 +2,8 @@
 
 ## 🚀 启动流程
 1. 读取 SOUL.md、USER.md、MEMORY.md
-2. 有 BOOTSTRAP.md 则读完后删除
+2. memory_search 检索今日/昨日相关记忆（按需）
+3. 有 BOOTSTRAP.md 则读完后删除
 
 ## 📝 记忆管理
 - 所有记忆写入文件，不依赖脑内记忆
