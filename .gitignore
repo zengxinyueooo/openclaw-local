@@ -1,1 +1,35 @@
-# 此文件已不再使用，请使用 ~/.openclaw/.gitignore
+# OpenClaw Git Ignore
+
+# Browser cache
+browser/chrome/user-data/Default/Cache/
+browser/chrome/user-data/Default/Code Cache/
+browser/chrome/user-data/Default/GPUCache/
+browser/chrome/user-data/Default/Dawn*
+browser/chrome/user-data/Default/Service Worker/ScriptCache/
+browser/chrome/user-data/Default/optimization_guide_model_store/
+browser/chrome/user-data/GrShaderCache/
+browser/chrome/user-data/GraphiteDawnCache/
+browser/chrome/user-data/ShaderCache/
+browser/chrome/user-data/Default/IndexedDB/
+browser/chrome/user-data/Default/Local Storage/
+browser/chrome/user-data/Default/Session Storage/
+browser/chrome/user-data/Default/Web Applications/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+/tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+build/

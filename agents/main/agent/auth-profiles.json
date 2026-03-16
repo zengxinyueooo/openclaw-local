@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "profiles": {
+    "qianfan:default": {
+      "type": "api_key",
+      "provider": "qianfan",
+      "key": "bce-v3/ALTAKSP-sPLLvC70loeiXdyDUw6D5/c4791aa5f1f94147a5530fadac4f8e1bfd987450"
+    }
+  },
+  "usageStats": {
+    "qianfan:default": {
+      "errorCount": 0,
+      "lastUsed": 1772979377502
+    }
+  }
+}

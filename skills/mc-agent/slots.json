@@ -1,0 +1,20 @@
+{
+  "1": {
+    "slotId": 1,
+    "alias": "MC-1号",
+    "specialty": "",
+    "task": "写一个 Python 程序，功能是计算斐波那契数列的前 N 个数。要求：1. 使用递归和迭代两种方式实现 2. 支持命令行参数输入 N 3. 比较两种方法的执行时间 4. 代码要有注释，保存到当前目录的 fibonacci.py",
+    "workdir": "/Users/zengxinyue/.openclaw/workspace",
+    "tmuxSession": "",
+    "pid": 0,
+    "claudeSessionId": null,
+    "jsonlPath": null,
+    "watcherPid": null,
+    "status": "running",
+    "startedAt": "2026-03-15T21:02:41+0800",
+    "startedEpoch": 1773579761.441916,
+    "lastActiveEpoch": 1773579761.441916,
+    "approvalCount": 0,
+    "approvalsPending": false
+  }
+}

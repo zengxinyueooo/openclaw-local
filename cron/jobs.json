@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "ce60bf77-965c-4a41-bba3-7253ed4e639a",
+      "agentId": "researcher",
+      "name": "每日AI新闻",
+      "description": "每日AI新闻抓取 - 小葡🍇执行",
+      "enabled": true,
+      "createdAtMs": 1773506409330,
+      "updatedAtMs": 1773541449139,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "抓取今天最新的AI新闻，使用Tavily skill搜索，整理成简洁摘要后发给我🍑"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "daxiang"
+      },
+      "state": {
+        "nextRunAtMs": 1773626400000,
+        "lastRunAtMs": 1773540487145,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 961994,
+        "lastError": "Channel is required when multiple channels are configured: daxiang, elephant Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
+    }
+  ]
+}

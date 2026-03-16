@@ -1,0 +1,98 @@
+{
+  "providers": {
+    "qianfan": {
+      "baseUrl": "https://qianfan.baidubce.com/v2",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "deepseek-v3.2",
+          "name": "DEEPSEEK V3.2",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 98304,
+          "maxTokens": 32768
+        },
+        {
+          "id": "ernie-5.0-thinking-preview",
+          "name": "ERNIE-5.0-Thinking-Preview",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 119000,
+          "maxTokens": 64000
+        }
+      ],
+      "apiKey": "catpaw"
+    },
+    "kubeplex-maas": {
+      "baseUrl": "https://mmc.sankuai.com/openclaw/v1",
+      "apiKey": "catpaw",
+      "api": "openai-completions",
+      "headers": {
+        "X-User-Id": "zengxinyue04",
+        "X-Conversation-Id": "hgsecx3tnaytcxsmq63n",
+        "X-Scene": "CATCLAW"
+      },
+      "models": [
+        {
+          "id": "catclaw-proxy-model",
+          "name": "CATCLAW_PROXY_MODEL",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 100000,
+          "maxTokens": 65536,
+          "api": "openai-completions"
+        }
+      ]
+    },
+    "baiduqianfancodingplan": {
+      "baseUrl": "https://qianfan.baidubce.com/v2/coding",
+      "apiKey": "bce-v3/ALTAKSP-sPLLvC70loeiXdyDUw6D5/c4791aa5f1f94147a5530fadac4f8e1bfd987450",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "kimi-k2.5",
+          "name": "kimi-k2.5",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0.0025,
+            "output": 0.01,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 98304,
+          "maxTokens": 65536,
+          "api": "openai-completions"
+        }
+      ]
+    }
+  }
+}

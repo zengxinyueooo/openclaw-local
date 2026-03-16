@@ -1,0 +1,13 @@
+{
+  "agent_id": "coder",
+  "task_id": "task-003",
+  "status": "completed",
+  "progress": 100,
+  "message": "\u4efb\u52a1\u5df2\u5b8c\u6210",
+  "timestamp": "2026-03-12T21:37:00.648664",
+  "details": {
+    "output_length": 3846,
+    "rounds": 1,
+    "reason": "\u4efb\u52a1\u5df2\u5b8c\u6210"
+  }
+}

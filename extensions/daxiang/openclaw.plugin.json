@@ -1,0 +1,13 @@
+{
+  "id": "daxiang",
+  "entry": "./dist/index.js",
+  "channels": [
+    "daxiang"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
+

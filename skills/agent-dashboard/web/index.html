@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Dashboard - AI 办公室</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <div id="loading">
+    <div class="loading-spinner"></div>
+    <p>加载办公室场景中...</p>
+  </div>
+
+  <div id="ui-layer">
+    <header class="header">
+      <h1>🐕 Agent 办公室</h1>
+      <div class="connection-status" id="connection-status">
+        <span class="status-dot offline"></span>
+        <span class="status-text">连接中...</span>
+      </div>
+    </header>
+
+    <!-- Task Board Overlay -->
+    <div id="task-board-overlay" class="task-board-overlay hidden">
+      <div class="task-board-modal">
+        <button class="close-btn" id="close-task-board">×</button>
+        <h2>📋 任务黑板</h2>
+        <div class="task-columns" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="task-column">
+            <h3>DOING</h3>
+            <div id="wip-list" class="task-list"></div>
+          </div>
+          <div class="task-column">
+            <h3>DONE</h3>
+            <div id="done-list" class="task-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Detail Panel - 大弹框布局 -->
+    <div id="agent-panel" class="agent-panel hidden">
+      <div class="agent-modal">
+        <div class="modal-header">
+          <div class="agent-info">
+            <div class="agent-avatar-large" id="panel-avatar">🤖</div>
+            <div class="agent-title">
+              <h2 id="panel-name">Agent Name</h2>
+              <div class="agent-status-line">
+                <span class="status-dot" id="panel-status-dot"></span>
+                <span id="panel-status">Idle</span>
+              </div>
+            </div>
+          </div>
+          <button class="close-btn" id="close-panel">×</button>
+        </div>
+        <div class="modal-body">
+          <!-- 左侧：终端输出 -->
+          <div class="terminal-section">
+            <h3>💻 实时终端</h3>
+            <div class="terminal-container">
+              <pre id="terminal-content" class="terminal-output-large">加载中...</pre>
+            </div>
+            <div class="current-task-section" id="current-task-box">
+              <h4>📋 当前任务</h4>
+              <p id="current-task-text">暂无任务</p>
+            </div>
+          </div>
+          <!-- 右侧：历史任务 -->
+          <div class="history-section">
+            <h3>📜 历史任务</h3>
+            <div class="history-list" id="history-list">
+              <!-- 动态填充 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls hint -->
+    <div class="controls-hint">
+      <p>🖱️ 左键旋转 | 右键平移 | 滚轮缩放 | 点击 Agent 查看详情 | 点击黑板查看任务</p>
+    </div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script src="agents.js"></script>
+  <script src="office.js"></script>
+  <script src="characters.js"></script>
+  <script src="taskboard.js"></script>
+  <script src="panel.js"></script>
+  <script src="scene.js"></script>
+</body>
+</html>

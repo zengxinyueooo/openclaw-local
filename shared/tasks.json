@@ -1,0 +1,36 @@
+{
+  "schema": "tasks.v1",
+  "agents": {
+    "coder": {
+      "name": "小橙",
+      "emoji": "🍊",
+      "tasks": [
+        {
+          "id": "TASK-CODER-001",
+          "title": "创建一个Python脚本，批量重命名文件",
+          "priority": "P1",
+          "status": "pending",
+          "createdAt": "2026-03-12 16:15",
+          "deadline": "2026-03-12 18:00",
+          "description": "写一个Python脚本，可以批量重命名指定目录下的文件"
+        }
+      ]
+    },
+    "researcher": {
+      "name": "小葡",
+      "emoji": "🍇",
+      "tasks": []
+    }
+  },
+  "taskTemplate": {
+    "id": "TASK-{agent}-{number}",
+    "title": "",
+    "priority": "P0|P1|P2",
+    "status": "pending|doing|done|failed",
+    "createdAt": "",
+    "deadline": "",
+    "description": "",
+    "result": "",
+    "notes": ""
+  }
+}

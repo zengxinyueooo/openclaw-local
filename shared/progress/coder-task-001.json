@@ -1,0 +1,13 @@
+{
+  "agent_id": "coder",
+  "task_id": "task-001",
+  "status": "completed",
+  "progress": 100,
+  "message": "脚本完成！",
+  "timestamp": "2026-03-12T18:10:54.642743",
+  "elapsed_seconds": 2.23,
+  "details": {
+    "file": "json_stats.py",
+    "lines": 120
+  }
+}
