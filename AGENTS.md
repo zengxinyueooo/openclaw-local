@@ -21,7 +21,7 @@
 
 | Agent | ID | Workspace | 用途 | Skill |
 |-------|-----|-----------|------|-------|
-| 小橙🍊 | coder | workspace-coder | Coding开发 | claude-code-coding |
+| 小橙🍊 | coder | workspace-coder | Coding开发 | mc-code-agent |
 | 小葡🍇 | researcher | workspace-researcher | 搜索调研 | tavily-search |
 | 小莓🍓 | xhs | workspace-xhs | 小红书运营 | xhs/* |
 
@@ -55,8 +55,35 @@ sessions_spawn(
 4. 小葡查新闻用 tavily-search skill
 5. 小莓用 xhs/* 相关 skills
 
+### Skill 查找规则
+**子Agent默认在自己的 workspace 查找 skill，找不到时需要显式指定路径：**
+- 方式1：派活时在任务描述里写清楚 skill 的完整路径
+- 方式2：子Agent在自己的 AGENTS.md 里定义 skill 软链接或路径映射
+- 方式3：统一使用小桃目录的 skill（推荐）：`/Users/zengxinyue/.openclaw/workspace/skills/<skill-name>/SKILL.md`
+
 ### 并行派发
 同时派多个任务时，同一轮工具调用里并行 spawn，不要等第一个完成再发第二个。
+
+### 子Agent完成通知规则 ⚠️
+**重要**：子Agent完成后不会自动通知主Agent，必须在 task 里明确要求！
+
+**mode: "run"（一次性任务）**：
+- 子Agent完成后结果存在 session 里
+- 必须在 task 描述中明确要求：「任务完成后用 message 工具通知小桃，汇报结果」
+- 或者主Agent主动 poll 查询结果
+
+**mode: "session"（持久 session）**：
+- 可以双向通信
+- 但仍需在 task 里明确通知要求
+
+**正确示例**：
+```
+sessions_spawn(
+  agentId="coder",
+  task="修复 xxx 问题。任务完成后必须用 message 工具通知小桃：成功/失败结果",
+  mode="run"
+)
+```
 
 ## 🛠️ 工具调用规则
 

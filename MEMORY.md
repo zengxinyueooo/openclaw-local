@@ -23,6 +23,7 @@
 
 ### Git工作流
 - 提交后自动 push，不需要询问
+- **远程仓库**: `https://github.com/zengxinyueooo/openclaw-local.git`
 
 ### 成长沉淀
 - 每日自动整理，原文先给宝宝展示，并把一天的.openclaw全目录下的文件改动给宝宝展示，宝宝同意后提交到 git（包括push）
